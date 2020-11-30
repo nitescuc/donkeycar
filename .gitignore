@@ -23,3 +23,4 @@ build
 
 # codecov
 htmlcov/
+mycar/data
