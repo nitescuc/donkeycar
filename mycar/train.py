@@ -443,7 +443,7 @@ def train(cfg, tub_names, model_name, transfer_model, model_type, continuous, au
                                 break
                             
                             if aug:
-                                img_arr = augment_image(img_arr)
+                                img_arr = augment_image(np_img=img_arr, apply_blur=True)
 
                             if cfg.CACHE_IMAGES:
                                 record['img_data'] = img_arr
@@ -817,7 +817,7 @@ def sequence_train(cfg, tub_names, model_name, transfer_model, model_type, conti
                                 if img_arr is None:
                                     break
                                 if aug:
-                                    img_arr = augment_image(img_arr)
+                                    img_arr = augment_image(np_img=img_arr, apply_blur=True)
                                 
                                 if cfg.CACHE_IMAGES:
                                     record['img_data'] = img_arr

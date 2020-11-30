@@ -9,6 +9,7 @@ from PIL import ImageEnhance
 import glob
 import numpy as np
 import math
+import cv2
 
 '''
     find_coeffs and persp_transform borrowed from:
@@ -41,7 +42,7 @@ def rand_persp_transform(img):
     return img.transform((width, height), Image.PERSPECTIVE, coeffs, Image.BICUBIC)
 
 
-def augment_image(np_img, shadow_images=None, do_warp_persp=False):
+def augment_image(np_img, shadow_images=None, do_warp_persp=False, apply_blur=False):
     """
     :param np_img: numpy image
         input image in numpy normalised format
@@ -58,6 +59,8 @@ def augment_image(np_img, shadow_images=None, do_warp_persp=False):
     # convert to PIL and apply transformation
     img = Image.fromarray(conv_img)
     img = augment_pil_image(img, shadow_images, do_warp_persp)
+    if apply_blur:
+        img = cv2.bilateralFilter(np.array(img),9,75,75)
     # transform back to normalised numpy format
     img_out = np.array(img).astype(np.float) * ONE_BY_255
     return img_out
