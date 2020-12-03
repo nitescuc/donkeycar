@@ -25,6 +25,7 @@ from tensorflow.python.keras.layers.merge import concatenate
 from tensorflow.python.keras.layers import LSTM
 from tensorflow.python.keras.layers.wrappers import TimeDistributed as TD
 from tensorflow.python.keras.layers import Conv3D, MaxPooling3D, Cropping3D, Conv2DTranspose
+from tensorflow.python.keras.layers.experimental.preprocessing import RandomTranslation, RandomRotation
 
 import donkeycar as dk
 
@@ -324,6 +325,9 @@ def default_n_linear(num_outputs, input_shape=(120, 160, 3), roi_crop=(0, 0)):
     
     img_in = Input(shape=input_shape, name='img_in')
     x = img_in
+    
+    x = RandomTranslation(height_factor=0.05, width_factor=0.1, fill_mode='constant')(x)
+    
     x = Convolution2D(24, (5,5), strides=(2,2), activation='relu', name="conv2d_1")(x)
     x = Dropout(drop)(x)
     x = Convolution2D(32, (5,5), strides=(2,2), activation='relu', name="conv2d_2")(x)
