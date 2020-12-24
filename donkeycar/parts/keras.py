@@ -326,7 +326,7 @@ def default_n_linear(num_outputs, input_shape=(120, 160, 3), roi_crop=(0, 0)):
     img_in = Input(shape=input_shape, name='img_in')
     x = img_in
     
-    x = RandomTranslation(height_factor=0.05, width_factor=0.1, fill_mode='constant')(x)
+    x = RandomTranslation(height_factor=0.05, width_factor=0.1, fill_mode='nearest')(x)
     
     x = Convolution2D(24, (5,5), strides=(2,2), activation='relu', name="conv2d_1")(x)
     x = Dropout(drop)(x)
