@@ -25,7 +25,7 @@ from tensorflow.python.keras.layers.merge import concatenate
 from tensorflow.python.keras.layers import LSTM
 from tensorflow.python.keras.layers.wrappers import TimeDistributed as TD
 from tensorflow.python.keras.layers import Conv3D, MaxPooling3D, Cropping3D, Conv2DTranspose
-from tensorflow.python.keras.layers.experimental.preprocessing import RandomTranslation, RandomRotation
+from keras.layers.experimental.preprocessing import RandomTranslation, RandomRotation
 
 import donkeycar as dk
 
