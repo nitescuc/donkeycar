@@ -58,9 +58,15 @@ def augment_image(np_img, shadow_images=None, do_warp_persp=False, apply_blur=Fa
     conv_img = conv_img.astype(np.uint8)
     # convert to PIL and apply transformation
     img = Image.fromarray(conv_img)
-    img = augment_pil_image(img, shadow_images, do_warp_persp)
+#    img = augment_pil_image(img, shadow_images, do_warp_persp)
     if apply_blur:
-        img = cv2.bilateralFilter(np.array(img),9,75,75)
+        hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+        img1 = hsv[:,:,2]
+#        clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
+#        clahe.apply(img1)
+        img2 = np.where(img1 < 220, 128, img1)
+        img3 = cv2.bilateralFilter(img2,9,75,75)
+        img = cv2.cvtColor(img3, cv2.COLOR_GRAY2BGR)
     # transform back to normalised numpy format
     img_out = np.array(img).astype(np.float) * ONE_BY_255
     return img_out
