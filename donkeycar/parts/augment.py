@@ -60,7 +60,7 @@ def augment_image(np_img, shadow_images=None, do_warp_persp=False, apply_blur=Fa
     img = Image.fromarray(conv_img)
 #    img = augment_pil_image(img, shadow_images, do_warp_persp)
     if apply_blur:
-        hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+        hsv = cv2.cvtColor(cv2.UMat(img), cv2.COLOR_BGR2HSV)
         img1 = hsv[:,:,2]
 #        clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
 #        clahe.apply(img1)
