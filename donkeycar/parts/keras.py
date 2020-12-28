@@ -274,7 +274,7 @@ def adjust_input_shape(input_shape, roi_crop):
 
 def default_categorical(input_shape=(120, 160, 3), roi_crop=(0, 0)):
 
-    opt = keras.optimizers.Adam()
+    opt = tf.optimizers.Adam()
     drop = 0.2
 
     #we now expect that cropping done elsewhere. we will adjust our expeected image size here:
